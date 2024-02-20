@@ -1,4 +1,4 @@
-package com.example.Project.Management.System.Entity;
+package com.example.Project.Management.System.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public class BaseEntity {
+public class baseEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;

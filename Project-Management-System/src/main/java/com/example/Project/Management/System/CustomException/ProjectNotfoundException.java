@@ -1,7 +1,7 @@
-package com.example.Project.Management.System.CustomException;
+package com.example.Project.Management.System.customException;
 
-public class ProjectNotfoundException extends RuntimeException{
-    public ProjectNotfoundException(String error){
+public class projectNotfoundException extends RuntimeException{
+    public projectNotfoundException(String error){
         super(error);
     }
 

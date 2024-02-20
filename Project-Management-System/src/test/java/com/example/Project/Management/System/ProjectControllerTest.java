@@ -1,13 +1,10 @@
 package com.example.Project.Management.System;
 
-import com.example.Project.Management.System.Controller.ProjectController;
-import com.example.Project.Management.System.CustomException.ProjectNotfoundException;
-import com.example.Project.Management.System.Dto.ProjectDto;
-import com.example.Project.Management.System.Entity.Project;
-import com.example.Project.Management.System.Repositories.ProjectRepository;
-import com.example.Project.Management.System.Service.ProjectService;
-import com.example.Project.Management.System.ServiceImpl.ProjectServiceImpl;
-import org.junit.jupiter.api.AfterEach;
+import com.example.Project.Management.System.controller.projectController;
+import com.example.Project.Management.System.dto.projectDto;
+import com.example.Project.Management.System.entity.Project;
+import com.example.Project.Management.System.repositories.projectRepository;
+import com.example.Project.Management.System.serviceImpl.projectServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,14 +26,15 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 @DataJpaTest
+
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class ProjectControllerTest {
+public class projectControllerTest {
     @Autowired
-    private ProjectRepository projectrepo;
+    private projectRepository projectrepo;
     @Mock
-    private ProjectServiceImpl projectservice;
+    private projectServiceImpl projectservice;
     @InjectMocks
-    private ProjectController projectcontroller;
+    private projectController projectcontroller;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -48,7 +46,7 @@ private Project project;
         LocalDate dateOfBirth = LocalDate.of(1997, 6, 21);
          project = new Project("shubham",dateOfBirth);
         projectrepo.save(project);
-        ProjectDto projectdto=modelMapper.map(project,ProjectDto.class);
+        projectDto projectdto=modelMapper.map(project, projectDto.class);
         when(projectservice.getproject(project.getId())).thenReturn(projectdto);
         ResponseEntity<?>responseEntity=projectcontroller.getproject(project.getId());
         verify(projectservice, times(1)).getproject(project.getId());
@@ -61,8 +59,8 @@ private Project project;
 
     @Test
     public void testAddProject_Success() {
-        ProjectDto inputProjectDto = new ProjectDto(6,"aryan",LocalDate.of(2020,01,04));
-        when(projectservice.addproject(any(ProjectDto.class))).thenReturn((inputProjectDto));
+        projectDto inputProjectDto = new projectDto(6,"aryan",LocalDate.of(2020,01,04));
+        when(projectservice.addproject(any(projectDto.class))).thenReturn((inputProjectDto));
         ResponseEntity<?> responseEntity = projectcontroller.addproject(inputProjectDto);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertNotNull(responseEntity.getBody());

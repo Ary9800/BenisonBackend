@@ -1,10 +1,10 @@
-package com.example.Project.Management.System.ServiceImpl;
+package com.example.Project.Management.System.serviceImpl;
 
-import com.example.Project.Management.System.CustomException.ProjectNotfoundException;
-import com.example.Project.Management.System.Dto.ProjectDto;
-import com.example.Project.Management.System.Entity.Project;
-import com.example.Project.Management.System.Repositories.ProjectRepository;
-import com.example.Project.Management.System.Service.ProjectService;
+import com.example.Project.Management.System.customException.projectNotfoundException;
+import com.example.Project.Management.System.dto.projectDto;
+import com.example.Project.Management.System.entity.Project;
+import com.example.Project.Management.System.repositories.projectRepository;
+import com.example.Project.Management.System.service.projectService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,34 +15,38 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class ProjectServiceImpl implements ProjectService {
+public class projectServiceImpl implements projectService {
     @Autowired
-    private ProjectRepository projectrepo;
+    private projectRepository projectrepo;
     @Autowired
     private ModelMapper modelMapper;
     @Override
-    public ProjectDto getproject(Integer id) {
-Project project=projectrepo.findById(id).orElseThrow(()->new ProjectNotfoundException("no project exist with this id"));
+    public projectDto getproject(Integer id) {
+Project project=projectrepo.findById(id).orElseThrow(()->new projectNotfoundException("no project exist with this id"));
 
-return modelMapper.map(project,ProjectDto.class);
+return modelMapper.map(project, projectDto.class);
 
     }
 
     @Override
-    public ProjectDto addproject(ProjectDto project) {
+    public projectDto addproject(projectDto project) {
+        try{
         Project project1=modelMapper.map(project,Project.class);
         if(projectrepo.existsByName(project1.getName())){
-            throw  new ProjectNotfoundException("project already exists");
+            throw  new projectNotfoundException("project already exists");
         }
       Project projectsaved= projectrepo.save(project1);
-        return modelMapper.map(projectsaved,ProjectDto.class);
-    }
+        return modelMapper.map(projectsaved, projectDto.class);
+    }catch (Exception e){
+            throw e;
+        }}
+
 
     @Override
-    public List<ProjectDto> getallproject() {
+    public List<projectDto> getallproject() {
        List<Project> project=projectrepo.findAll();
        if(!project.isEmpty()){
-       return project.stream().map(project1->modelMapper.map(project1,ProjectDto.class)).collect(Collectors.toList());
+       return project.stream().map(project1->modelMapper.map(project1, projectDto.class)).collect(Collectors.toList());
     }
-       throw new ProjectNotfoundException("no project found");
+       throw new projectNotfoundException("no project found");
 }}

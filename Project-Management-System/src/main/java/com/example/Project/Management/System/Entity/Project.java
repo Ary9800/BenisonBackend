@@ -1,4 +1,4 @@
-package com.example.Project.Management.System.Entity;
+package com.example.Project.Management.System.entity;
 
 import lombok.*;
 
@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name="Project")
-public class Project extends BaseEntity {
+@Table(name="project")
+public class Project extends baseEntity {
     @Column(name="name", length=50,nullable = false)
     private String name;
     @Column(name="Start_date",nullable = false)

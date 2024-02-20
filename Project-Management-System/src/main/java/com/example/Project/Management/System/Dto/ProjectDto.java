@@ -1,4 +1,4 @@
-package com.example.Project.Management.System.Dto;
+package com.example.Project.Management.System.dto;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ProjectDto {
+public class projectDto {
     private Integer id;
     private String name;
     private LocalDate start_date;

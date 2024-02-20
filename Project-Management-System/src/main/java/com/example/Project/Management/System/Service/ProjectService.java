@@ -1,14 +1,13 @@
-package com.example.Project.Management.System.Service;
-import com.example.Project.Management.System.Dto.ProjectDto;
-import com.example.Project.Management.System.Entity.Project;
+package com.example.Project.Management.System.service;
+import com.example.Project.Management.System.dto.projectDto;
 
 import java.util.List;
 
-public interface ProjectService {
+public interface projectService {
 
-    ProjectDto getproject(Integer id);
+    projectDto getproject(Integer id);
 
-    ProjectDto addproject(ProjectDto project);
+    projectDto addproject(projectDto project);
 
-   List<ProjectDto> getallproject();
+   List<projectDto> getallproject();
 }

@@ -1,10 +1,9 @@
-package com.example.Project.Management.System.Repositories;
+package com.example.Project.Management.System.repositories;
 
-import com.example.Project.Management.System.Entity.Project;
+import com.example.Project.Management.System.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-public interface ProjectRepository extends JpaRepository<Project,Integer> {
+public interface projectRepository extends JpaRepository<Project,Integer> {
 
     boolean existsByName(String name);
 }
